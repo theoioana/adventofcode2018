@@ -1,0 +1,60 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+
+using namespace std;
+
+ifstream fin("Test.in");
+
+int main() {
+
+	vector<int> freq(10000000, 0);
+	vector<int> freq2(10000000, 0);
+	vector<int> values;
+	
+	long long n;
+
+	long long sum = 0;
+
+	freq[0]++;
+
+	while (fin >> n){
+		values.push_back(n);
+	}
+
+	int i = 0;
+
+	int size = values.size();
+
+	while (1) {
+		
+		sum += values[i];
+
+		(sum < 0) ? freq2[abs(sum)] += 1 : freq[sum] += 1;
+		if( sum < 0 ){
+			if (freq2[abs(sum)] > 1) {
+				cout << sum;
+				system("pause");
+				return 0;
+			}
+		}
+		else {
+			if (freq[sum] > 1) {
+				cout << sum;
+				system("pause");
+				return 0;
+			}
+		}
+
+		++i;
+
+		if (i == size) {
+			i = 0;
+		}
+
+	}
+
+	return 0;
+}
